@@ -43,7 +43,7 @@
                                     <th>Mode</th>
                                     <th>Bill</th>
                                     <th>Edit</th>
-                                    <th>Delete</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -65,9 +65,7 @@
                         <td><form action='viewbill.php' method='get'> <input type='hidden' name='bill_id' value=". $row['bill_id'] ." /><button type='submit' class='edit btn btn btn btn-outline-light'> view bill </button></form></td>
                         <td> <button class='edit btn btn btn btn-outline-light' id=".$sno."> Edit </button></td>";
                         ?>
-                        <td><button class='edit btn btn btn btn-outline-light'>
-                          <a style="text-decoration: none; color:red; font-weight:500;" href="deletebillQuery.php?billid=<?php echo $row['bill_id'];?>">Delete</a>
-                        </button></td>
+                        
                         </tr>
                         <?php
                       }
@@ -93,7 +91,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
       $email = $_POST["emailEdit"];
 
     // Sql query to be executed
-    $sql = "UPDATE bills SET cust_name = '$name', cust_mob = '$mobile', cust_email = '$email' WHERE bill_id = $billid";
+    $sql = "UPDATE bill SET customer_name = '$name', customer_phone = '$mobile', customer_mail = '$email' WHERE user_id =".$_SESSION['user_id']." AND bill_id = $billid";
+    // echo $sql;
     $result = mysqli_query($conn, $sql);
     if($result){
       $update = true;
